@@ -10,7 +10,10 @@ function getRoomId() {
     }
     return roomId;
 }
-const wss = new ws_1.WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT || 8080;
+//@ts-ignore
+const wss = new ws_1.WebSocketServer({ port: PORT, host: "0.0.0.0" });
+console.log(`WebSocket server started on ws://0.0.0.0:${PORT}`);
 wss.on("connection", (socket) => {
     console.log("Client connected");
     socket.on("message", (data) => {
@@ -66,4 +69,3 @@ wss.on("connection", (socket) => {
         }
     });
 });
-console.log("WebSocket server started on ws://localhost:8080");
